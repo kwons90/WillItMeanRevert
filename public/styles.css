@@ -1,0 +1,33 @@
+.mainTitle {
+    display: "flex";
+    flex-direction: "row";
+    font-family: helvetica;
+    justify-content: center;
+    margin: 3px;
+    padding: 3px;
+}
+
+.chartInputs {
+    display: "flex";
+    flex-direction: "row";
+    font-family: "helvetica";
+    margin: 3px;
+    padding: 3px;
+    border: 1px black;
+}
+
+.chartContainer {
+    display: "flex";
+    flex-direction: "row";
+    font-family: "helvetica";
+    margin: 3px;
+    padding: 3px;
+}
+
+.disclaimer {
+    display: "flex";
+    flex-direction: "row";
+    font-family: "helvetica";
+    margin: 3px;
+    padding: 3px;
+}
