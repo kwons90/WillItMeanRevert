@@ -23,7 +23,10 @@ const stringifyDate = (dateObj) => {
   ].join('-');
 };
 
+const generateDummy = () => Math.ceil(Math.random() * 10000);
+
 export {
   stringifyDate,
   getChart,
+  generateDummy,
 };

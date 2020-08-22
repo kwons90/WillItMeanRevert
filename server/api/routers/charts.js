@@ -14,7 +14,8 @@ chartRouter.post('/', async (req, res) => {
   } = req.body;
   // console.log('request is ', `https://stackathon-flask.herokuapp.com/generateChart?ticker=${ticker}&start_date=${startDate}&end_date=${endDate}&chart_type=${chartType}&api_key=${apiKey}`);
   await axios.get(`https://stackathon-flask.herokuapp.com/generateChart?ticker=${ticker}&start_date=${startDate}&end_date=${endDate}&chart_type=${chartType}&api_key=${apiKey}`);
-  res.status(200).send('OK');
+  const response = await axios.get(`https://stackathon-flask.herokuapp.com/getChart`);
+  res.status(200).send({ src: response.data });
 });
 
 module.exports = chartRouter;
