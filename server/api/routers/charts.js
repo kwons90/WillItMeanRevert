@@ -1,44 +1,21 @@
-/* eslint-disable global-require */
-// import express JS module into app
-// and creates its variable.
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
 require('dotenv').config();
-const express = require('express');
-const app = express();
+const axios = require('axios');
 const chartRouter = require('express').Router();
 
-const apiKey = process.env.IMDB_API_KEY;
+const apiKey = process.env.TOKEN;
 
-// Function callName() is executed whenever
-// url is of the form localhost:3000/name
-chartRouter.get('/', async (req, res) => {
-  const { spawn } = require('child_process');
-  const process = spawn('python', ['./analytics.py',
-    req.query.ticker,
-    req.query.start_date,
-    req.query.end_date,
-    req.query.api_key,
-  ]);
-  process.stdout.on('data', (data) => {
-    res.send(data.toString());
-  });
+require('dotenv').config();
+
+chartRouter.post('/', async (req, res) => {
+  console.log(req.body);
+  const {
+    ticker, startDate, endDate, chartType,
+  } = req.body;
+  // console.log('request is ', `https://stackathon-flask.herokuapp.com/generateChart?ticker=${ticker}&start_date=${startDate}&end_date=${endDate}&chart_type=${chartType}&api_key=${apiKey}`);
+  await axios.get(`https://stackathon-flask.herokuapp.com/generateChart?ticker=${ticker}&start_date=${startDate}&end_date=${endDate}&chart_type=${chartType}&api_key=${apiKey}`);
+  res.status(200).send('Chart Changed');
 });
 
 module.exports = chartRouter;
-// function callName(req, res) {
-
-// Use child_process.spawn method from
-// child_process module and assign it
-// to variable spawn
-
-// Parameters passed in spawn -
-// 1. type_of_script
-// 2. list containing Path of the script
-//    and arguments for the script
-
-// E.g : http://localhost:3000/charts?ticker=MSFT&start_date=2018-01-01&end_date=2020-08-16&chart_type=EVEBITDA
-// so, first name = Mike and last name = Will
-
-// Takes stdout data from script which executed
-// with arguments and send this data to res object
-
-// }
