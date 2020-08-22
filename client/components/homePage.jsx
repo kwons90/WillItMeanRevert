@@ -10,12 +10,17 @@ const defaultStart = new Date();
 defaultStart.setFullYear(defaultStart.getFullYear() - 1);
 const defaultStartDate = stringifyDate(defaultStart);
 
+const num = 0;
+
 function homePage() {
   const [ticker, setTicker] = useState('IBM');
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(todayDate);
   const [chartType, setChartType] = useState('EV/EBITDA');
   const [chart, setChart] = useState('https://stackathon-flask.herokuapp.com/getChart');
+  const [timeStamp, setTimeStamp] = useState(0);
+
+
   console.log('chart Type is', chartType);
   console.log('startTime Type is', defaultStartDate);
   console.log('endTime Type is', todayDate);
@@ -46,7 +51,7 @@ function homePage() {
             >
               <option value="EV/EBITDA">EV/EBITDA</option>
               <option value="P/E">P/E</option>
-              <option value="P/B">EV/Revenue</option>
+              <option value="P/B">P/B</option>
             </select>
           </div>
           <div>
@@ -74,6 +79,8 @@ function homePage() {
             onClick={async () => {
               await getChart(ticker, chartType, startDate, endDate);
               setChart('https://stackathon-flask.herokuapp.com/getChart');
+              num++;
+              setTimeStamp( num );
             }}
           >
             <label>Check!</label>
@@ -81,10 +88,10 @@ function homePage() {
         </form>
       </div>
       <div className="chartContainer">
-        <img alt="valuations" src={chart} />
+        <img alt="valuations" src={'https://stackathon-flask.herokuapp.com/getChart'} />
       </div>
       <div className="disclaimer">
-        <p>All financial data from  finance data</p>
+        <p>All financial data from Qunadl Core US Fundamentals data - academic use only, not to be commercially distributed</p>
       </div>
     </div>
   );
